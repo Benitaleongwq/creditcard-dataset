@@ -1,4 +1,4 @@
-# 🎬 Credit Card dataset template
+#  Credit Card dataset template
 
 A simple Streamlit app showing credit card data from Seedly
 

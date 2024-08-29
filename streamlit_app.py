@@ -15,12 +15,12 @@ import pandas as pd
 import streamlit as st
 
 # Show the page title and description.
-st.set_page_config(page_title="Movies dataset", page_icon="🎬")
-st.title("🎬 Movies dataset")
+st.set_page_config(page_title="Credit Card dataset", page_icon="🎬")
+st.title("Credit card dataset")
 st.write(
     """
-    This app visualizes data from [The Movie Database (TMDB)](https://www.kaggle.com/datasets/tmdb/tmdb-movie-metadata).
-    It shows which movie genre performed best at the box office over the years. Just 
+    This app visualizes data from [The Credt Card Database 
+    It shows sentimental analysis of 5 credit cards over the years. Just 
     click on the widgets below to explore!
     """
 )
@@ -30,7 +30,7 @@ st.write(
 # reruns (e.g. if the user interacts with the widgets).
 @st.cache_data
 def load_data():
-    df = pd.read_csv("data/movies_genres_summary.csv")
+    df = pd.read_csv("SeedlyReview.csv")
     return df
 
 
@@ -38,18 +38,18 @@ df = load_data()
 
 # Show a multiselect widget with the genres using `st.multiselect`.
 genres = st.multiselect(
-    "Genres",
+    "Credit Cards",
     df.genre.unique(),
-    ["Action", "Adventure", "Biography", "Comedy", "Drama", "Horror"],
+    ["UOB One", "Adventure", "Biography", "Comedy", "Drama", "Horror"],
 )
 
 # Show a slider widget with the years using `st.slider`.
 years = st.slider("Years", 1986, 2006, (2000, 2016))
 
 # Filter the dataframe based on the widget input and reshape it.
-df_filtered = df[(df["genre"].isin(genres)) & (df["year"].between(years[0], years[1]))]
+df_filtered = df[(df["credit cards"].isin(genres)) & (df["year"].between(years[0], years[1]))]
 df_reshaped = df_filtered.pivot_table(
-    index="year", columns="genre", values="gross", aggfunc="sum", fill_value=0
+    index="year", columns="credit cards", values="gross", aggfunc="sum", fill_value=0
 )
 df_reshaped = df_reshaped.sort_values(by="year", ascending=False)
 
